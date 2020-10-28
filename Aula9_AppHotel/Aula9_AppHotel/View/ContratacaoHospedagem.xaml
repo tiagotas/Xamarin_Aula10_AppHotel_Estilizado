@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Minha Estadia"
+             BackgroundColor="DarkOliveGreen"
+             x:Class="Aula9_AppHotel.View.ContratacaoHospedagem">
+    <ContentPage.Content>
+
+        <Frame CornerRadius="10"
+               BackgroundColor="#FFF"
+               Margin="10"
+               Padding="10">
+
+            <StackLayout VerticalOptions="CenterAndExpand">
+
+                <Label Text="Cálculo da Diária"
+                       FontSize="40"
+                       TextColor="DarkOliveGreen"
+                       Style="{StaticResource TituloFontePersonalizada}"
+                       HorizontalTextAlignment="Center"  
+                       VerticalOptions="StartAndExpand"
+                       Margin="0, 10, 0, 20" />
+
+                <Grid RowSpacing="1" 
+                      ColumnSpacing="1" 
+                      Padding="0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+
+                    <!-- Definição dos Labels e Stepper da quantidade de Adultos -->
+                    <Label Grid.Row="0" Grid.Column="0"
+                           Text="Adultos:"
+                           Style="{StaticResource LabelsCampos }" />
+
+                    <Label x:Name="lbl_qnt_adultos" Grid.Row="0" Grid.Column="1"
+                           BindingContext="{x:Reference stepperAdulto}" 
+                           Text="{Binding Value}"                  
+                           Style="{StaticResource LabelsValoresStepper}"/>
+
+                    <Stepper x:Name="stepperAdulto" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"
+                             Style="{StaticResource StepperVerde }"
+                             Minimum="0" 
+                             Maximum="10" 
+                             Increment="1" />
+
+                    <!-- Definição dos Labels e Stepper da quantidade de Crianças -->
+                    <Label Grid.Row="1" Grid.Column="0"                               
+                           Text="Crianças:"
+                           Style="{StaticResource LabelsCampos }" />
+
+                    <Label x:Name="lbl_qnt_criancas" Grid.Row="1" Grid.Column="1"                   
+                           BindingContext="{x:Reference stepperCrianca}" 
+                           Text="{Binding Value}"                   
+                           Style="{StaticResource LabelsValoresStepper}" />
+
+                    <Stepper x:Name="stepperCrianca"  Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" 
+                             Style="{StaticResource StepperVerde }"
+                             Minimum="0" 
+                             Maximum="5" 
+                             Increment="1" />
+                </Grid>
+
+                <StackLayout Orientation="Vertical">
+
+                    <Label Style="{StaticResource TituloFontePersonalizada}"
+                               HorizontalOptions="CenterAndExpand"
+                               FontSize="25"
+                               TextColor="DarkOliveGreen"
+                               Margin="0, 25, 0, 0"
+                               Text="Qual acomodação?" />
+
+
+                    <!-- Definição da lista "dinâmica" de tipos quartos disponíveis -->
+                    <Picker x:Name="pck_quarto"                
+                            Title="Selecione o Quarto" 
+                            HorizontalOptions="CenterAndExpand"
+                            ItemDisplayBinding="{Binding Descricao }" />
+
+
+                    <!-- Definição das Datas de Entrada (CheckIn) e Saída (CheckOut) -->
+                    <Label Style="{StaticResource TituloFontePersonalizada}"
+                           HorizontalOptions="CenterAndExpand"
+                           FontSize="25"
+                           TextColor="DarkOliveGreen"
+                           Margin="0, 25, 0, 0"
+                           Text="Selecione o Périodo" />
+
+
+                    <!-- CheckIn  -->
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Check-In:" Style="{StaticResource LabelsCampos }" />
+
+                        <DatePicker x:Name="dtpck_data_checkin"
+                                        DateSelected="dtpck_data_checkin_DateSelected"
+                                        Style="{StaticResource DataVerde}"
+                                        Format="dd/MM/yyyy"  />
+                    </StackLayout>
+
+
+                    <!-- CheckOut -->
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Check-Out:" Style="{StaticResource LabelsCampos }" />
+
+                        <DatePicker x:Name="dtpck_data_checkout" 
+                                        Style="{StaticResource DataVerde}"
+                                        Format="dd/MM/yyyy"  />
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Botão que que chama o método que faz o cálculo e encaminha para outra página. -->
+                <Button Text="Calcular Minha Estadia"
+                        Clicked="BtnCalcular_Clicked"
+                        VerticalOptions="EndAndExpand"
+                        HorizontalOptions="Fill"
+                        Margin="0, 25, 0, 0"
+                        Style="{StaticResource BotaoVerde }" />
+            </StackLayout>
+        </Frame>
+    </ContentPage.Content>
+</ContentPage>
